@@ -2,10 +2,9 @@ const Item = (item) => {
     console.log(item);
     return (
         <div>
-            <h3>{item.name}</h3>
-            <p>{item.price}</p>
-            <p>{item.condition}</p>
-            <p>item #</p>
+            <h3>{item.item['name']}</h3>
+            <p>Price: ${item.item['price']}</p>
+            <p>Condition: {item.item['condition']}</p>
         </div>
     );
 }
