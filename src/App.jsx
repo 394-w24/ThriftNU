@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useDbData } from './firebase';
 
 const App = () => {
   const [count, setCount] = useState(0);
@@ -9,6 +10,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        {console.log(useDbData())}
         <p>Hello Vite + React!</p>
         <p>
           <button onClick={() => setCount(count => count + 1)}>
