@@ -1,0 +1,22 @@
+.Img {
+    width: 40%;
+    /* height: 100%; */
+    display: block;
+
+}
+
+.Item {
+    display: flex;
+    border-radius: 5px; 
+    margin: 10px;
+    width: 300px;
+    border: 1px;
+    flex-direction: row-reverse;
+    left: 0;
+}
+
+.Info {
+
+
+
+}
