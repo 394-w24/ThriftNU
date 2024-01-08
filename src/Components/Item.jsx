@@ -1,10 +1,10 @@
-const Item = (item) => {
-    console.log(item);
+const Item = ({item}) => {
+    const { condition, name, price, seller } = item;
     return (
         <div>
-            <h3>{item.item['name']}</h3>
-            <p>Price: ${item.item['price']}</p>
-            <p>Condition: {item.item['condition']}</p>
+            <h3>{name}</h3>
+            <p>Price: ${price}</p>
+            <p>Condition: {condition}</p>
         </div>
     );
 }
