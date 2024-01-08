@@ -9,7 +9,7 @@ const Item = ({ item }) => {
         <p>Price: ${price}</p>
         <p>Condition: {condition}</p>
         <p>Sold by: {seller}</p>
-        <p>Seller Email: {email}</p>
+        <p>Seller's Email: {email}</p>
         <p>Description: {description}</p>
       </div>
       <img className="Img" src={imageURL} alt="product" />
