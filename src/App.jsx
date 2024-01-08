@@ -26,8 +26,8 @@ const App = () => {
 
     fetchData();
   }, []);
-  console.log(products)
 
+  
 
   return (
     <div className="App">
