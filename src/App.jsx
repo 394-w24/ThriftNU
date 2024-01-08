@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { database } from "./firebase";
 import { ref as getDbRef, get, onValue } from "firebase/database";
 import ItemList from "./Components/ItemList";
+import Homepage from "./Components/Homepage";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -27,11 +28,9 @@ const App = () => {
     fetchData();
   }, []);
 
-  
-
   return (
     <div className="App">
-      <ItemList items={products} />
+      <Homepage products={products} />
     </div>
   );
 };
