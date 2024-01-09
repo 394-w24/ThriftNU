@@ -1,7 +1,7 @@
 import "./Item.css";
 
-const Item = ({ item }) => {
-  const { condition, name, price, imageURL, seller, email, description } = item;
+const Item = ({ item, click}) => {
+  const { condition, name, price, imageURL, seller, email, description} = item;
   return (
     // <div className="Item">
     //   <div className="Info">
@@ -14,7 +14,7 @@ const Item = ({ item }) => {
     //   </div>
     //   <img className="Img" src={imageURL} alt="product" />
     // </div>
-    <div className="card" style={{width: '18rem', 'marginBottom': '3rem'}}>
+    <div className="card" style={{width: '18rem', 'marginBottom': '3rem'}} onClick={click}>
         <img className="card-img-top" src={imageURL} alt="product" style={{width: '18rem'}}/>
         <div className="card-body">
             <h5 className="card-title">{name}</h5>
