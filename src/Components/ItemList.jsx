@@ -8,7 +8,7 @@ const ItemList = ({items, setSelectedItem, openModal}) => {
     }
 
     return (
-        <div>
+        <div style={{'display': 'flex', 'justify-content': 'space-evenly', 'flex-wrap': 'wrap'}}>
             {Object.values(items).map((item, id) =>
                 <Item key={id} item={item} onClick={() => clickHandler(item)} />)}
         </div>
