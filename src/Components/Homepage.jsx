@@ -12,11 +12,24 @@ const Homepage = ({ products }) => {
 
   return (
     <div>
-      {/* <button onClick={openModal}>Open Modal</button> */}
       <Modal open={open} close={closeModal}>
-        <div>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda, et dolore adipisci cumque nulla recusandae. Incidunt suscipit voluptate doloribus excepturi minima neque sit architecto, culpa ipsum consequatur? Nisi, tenetur incidunt?</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi blanditiis dolorem praesentium velit corporis quaerat eos laboriosam corrupti dolor, pariatur officia adipisci, eius cumque ipsam consectetur doloribus perferendis quae magni!</p></div>
+        {selected ?
+          <div>
+            <div className="card" style={{width: '18rem', 'marginBottom': '3rem'}}>
+                <img className="card-img-top" src={selected.imageURL} alt="product" style={{width: '18rem'}}/>
+                <div className="card-body">
+                    <h5 className="card-title">{selected.name}</h5>
+                    <p className="card-text">{selected.description}</p>
+                    <p className="card-text">Price: ${selected.price}</p>
+                    <p className="card-text">Condition: {selected.condition}</p>
+                    <p className="card-text">Seller: {selected.seller}</p>
+                    <p className="card-text">Seller's Email: {selected.email}</p>
+                </div>
+            </div>
+          </div>
+          : 
+          <div></div>
+        }
       </Modal>
       <ItemList items={products} setSelectedItem={setSelected} openModal={openModal} />
     </div>

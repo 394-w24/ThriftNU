@@ -6,6 +6,7 @@ const ItemList = ({items, setSelectedItem, openModal}) => {
         setSelectedItem(item);
         openModal();
     }
+    
 
     return (
         <div style={{'display': 'flex', 'justify-content': 'space-evenly', 'flex-wrap': 'wrap'}}>
