@@ -14,8 +14,8 @@ const Item = ({ item, click}) => {
     //   </div>
     //   <img className="Img" src={imageURL} alt="product" />
     // </div>
-    <div className="card" style={{width: '18rem', 'marginBottom': '3rem'}} onClick={click}>
-        <img className="card-img-top" src={imageURL} alt="product" style={{width: '18rem'}}/>
+    <div className="card" onClick={click}>
+        <img className="card-img-top" src={imageURL} alt="product"/>
         <div className="card-body">
             <h3 className="card-title">{name}</h3>
             <p className="card-text">Price: ${price}.</p>

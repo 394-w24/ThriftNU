@@ -12,15 +12,21 @@
 
 .modal-show {
   visibility: visible;
-  background-color: rgb(160, 160, 160, 0.8);
+  background-color: rgba(160, 160, 160, 0.8);
   transition: opacity 0.2s linear;
 }
 
 .modal-content {
   background-color: white;
   opacity: 1;
-  padding: 2rem 3rem;
+  margin: 0rem;
+  padding: 0 1 0rem;
   border-radius: 0.5rem;
+  max-height: 80vh;
+  max-width: 60vw;
+  overflow: auto; 
+  overflow-wrap: break-word;
+  box-sizing: border-box; 
 }
 
 .modal-show .modal-content {

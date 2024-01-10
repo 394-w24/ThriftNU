@@ -15,8 +15,8 @@ const Homepage = ({ products }) => {
       <Modal open={open} close={closeModal}>
         {selected ?
           <div>
-            <div className="card" style={{width: '18rem'}}>
-                <img className="card-img-top" src={selected.imageURL} alt="product" style={{width: '18rem'}}/>
+            <div className="card" style={{maxWidth: '60vw', boxShadow: 'none'}}>
+                <img className="card-img-top" src={selected.imageURL} alt="product" style={{width: '80%', height: 'auto', position: 'relative'}}/>
                 <div className="card-body">
                     <h2 className="card-title">{selected.name}</h2>
                     <p className="card-text">{selected.description}</p>
@@ -31,6 +31,7 @@ const Homepage = ({ products }) => {
           <div></div>
         }
       </Modal>
+      <div><h1>ThriftNU</h1></div>
       <ItemList items={products} setSelectedItem={setSelected} openModal={openModal} />
     </div>
   );
