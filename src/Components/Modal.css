@@ -1,16 +1,26 @@
 .modal {
-  display: block;
+  display: flex;
   visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-show {
   visibility: visible;
-  background-color: rgba(169, 169, 169, 0.8);
+  background-color: rgb(160, 160, 160, 0.8);
   transition: opacity 0.2s linear;
 }
 
 .modal-content {
-  opacity: 0;
+  background-color: white;
+  opacity: 1;
+  padding: 2rem 3rem;
+  border-radius: 0.5rem;
 }
 
 .modal-show .modal-content {

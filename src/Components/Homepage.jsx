@@ -15,15 +15,15 @@ const Homepage = ({ products }) => {
       <Modal open={open} close={closeModal}>
         {selected ?
           <div>
-            <div className="card" style={{width: '18rem', 'marginBottom': '3rem'}}>
+            <div className="card" style={{width: '18rem'}}>
                 <img className="card-img-top" src={selected.imageURL} alt="product" style={{width: '18rem'}}/>
                 <div className="card-body">
-                    <h5 className="card-title">{selected.name}</h5>
+                    <h2 className="card-title">{selected.name}</h2>
                     <p className="card-text">{selected.description}</p>
                     <p className="card-text">Price: ${selected.price}</p>
                     <p className="card-text">Condition: {selected.condition}</p>
                     <p className="card-text">Seller: {selected.seller}</p>
-                    <p className="card-text">Seller's Email: {selected.email}</p>
+                    <p className="card-text">Seller's Email: <a href={`mailto:${selected.email}`}>{selected.email}</a></p>
                 </div>
             </div>
           </div>

@@ -17,7 +17,7 @@ const Item = ({ item, click}) => {
     <div className="card" style={{width: '18rem', 'marginBottom': '3rem'}} onClick={click}>
         <img className="card-img-top" src={imageURL} alt="product" style={{width: '18rem'}}/>
         <div className="card-body">
-            <h5 className="card-title">{name}</h5>
+            <h3 className="card-title">{name}</h3>
             <p className="card-text">Price: ${price}.</p>
             <p className="card-text">Condition: {condition}</p>
         </div>
