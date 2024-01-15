@@ -4,15 +4,15 @@ import "./Modal.css";
 
 const Modal = ({ children, open, close }) => (
   <div
-    className={`modal ${open ? "modal-show" : ""}`}
+    className={`custom-modal ${open ? "custom-modal-show" : ""}`}
     tabIndex="-1"
     role="dialog"
     onClick={(evt) => {
       if (evt.target === evt.currentTarget) close();
     }}
   >
-    <div className="modal-dialog" role="document">
-      <div className="modal-content">
+    <div className="custom-modal-dialog" role="document">
+      <div className="custom-modal-content">
         {/* <div className="modal-header">
           <button
             type="button"
@@ -21,7 +21,7 @@ const Modal = ({ children, open, close }) => (
             onClick={close}
           />
         </div> */}
-        <div className="modal-body">{children}</div>
+        <div className="custom-modal-body">{children}</div>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-.modal {
+.custom-modal {
   display: flex;
   visibility: hidden;
   position: fixed;
@@ -8,15 +8,16 @@
   right: 0;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 }
 
-.modal-show {
+.custom-modal-show {
   visibility: visible;
   background-color: rgba(160, 160, 160, 0.8);
   transition: opacity 0.2s linear;
 }
 
-.modal-content {
+.custom-modal-content {
   background-color: white;
   opacity: 1;
   margin: 0rem;
@@ -29,11 +30,11 @@
   box-sizing: border-box; 
 }
 
-.modal-show .modal-content {
+.custom-modal-show .custom-modal-content {
   opacity: 1;
   transition: 0.2s linear;
 }
 
-.modal-header {
+.custom-modal-header {
   margin-left: auto;
 }
