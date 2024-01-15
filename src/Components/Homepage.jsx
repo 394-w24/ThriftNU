@@ -46,10 +46,11 @@ const Homepage = ({ products }) => {
 
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Dropdown Button
+          {dropValue ? dropValue : "Select a subject"}
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
+        <Dropdown.Item onClick={() => {setDropValue(null)}}>All</Dropdown.Item>
         {[
             ...new Set(Object.values(products).map((item) => item.subject)),
           ].map((subject, id) => (
@@ -58,7 +59,7 @@ const Homepage = ({ products }) => {
         </Dropdown.Menu>
       </Dropdown>
       
-      <ItemList items={products} setSelectedItem={setSelected} openModal={openModal} />
+      <ItemList items={products} setSelectedItem={setSelected} openModal={openModal} dropValue={dropValue}/>
     </div>
   );
 };
