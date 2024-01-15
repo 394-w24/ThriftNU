@@ -6,9 +6,20 @@ import Dropdown from 'react-bootstrap/Dropdown';
 const Homepage = ({ products }) => {
   const [selected, setSelected] = useState(null);
   const [open, setOpen] = useState(false);
+  const [dropValue, setDropValue] = useState(null);
 
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
+
+  console.log(dropValue)
+  for (let i = 0; i < products.length; i++) {
+
+    console.log(products[i].category);
+    if (products[i].category !== dropValue) {
+    }
+  }
+  // const dropdownValues = () => {
+
 
   return (
     <div>
@@ -39,9 +50,11 @@ const Homepage = ({ products }) => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        {[
+            ...new Set(Object.values(products).map((item) => item.subject)),
+          ].map((subject, id) => (
+            <Dropdown.Item key={id} onClick={() => {setDropValue(subject)}}>{subject}</Dropdown.Item>
+          ))}
         </Dropdown.Menu>
       </Dropdown>
       
