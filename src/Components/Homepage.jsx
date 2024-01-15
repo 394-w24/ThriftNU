@@ -1,7 +1,8 @@
 import ItemList from "./ItemList";
 import { useState } from "react";
 import Modal from "./Modal";
-import { Button } from "bootstrap";
+import Dropdown from 'react-bootstrap/Dropdown';
+// import { Button } from "bootstrap";
 
 const Homepage = ({ products }) => {
   const [selected, setSelected] = useState(null);
@@ -12,6 +13,7 @@ const Homepage = ({ products }) => {
 
   return (
     <div>
+      {console.log(open)};
       <Modal open={open} close={closeModal}>
         {selected ?
           <div>
@@ -32,6 +34,19 @@ const Homepage = ({ products }) => {
         }
       </Modal>
       <div><h1>ThriftNU</h1></div>
+
+      <Dropdown>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          Dropdown Button
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+      
       <ItemList items={products} setSelectedItem={setSelected} openModal={openModal} />
     </div>
   );
