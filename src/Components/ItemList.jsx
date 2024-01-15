@@ -2,8 +2,8 @@ import Item from "./Item";
 
 const ItemList = ({items, setSelectedItem, openModal}) => {
     const clickHandler = (item) => {
-        console.log("test");
         setSelectedItem(item);
+        console.log("clicked. item: " + item.name);
         openModal();
     }
     
