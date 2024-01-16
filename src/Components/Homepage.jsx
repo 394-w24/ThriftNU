@@ -16,13 +16,11 @@ const Homepage = ({ products }) => {
     setShowForm(!showForm); // Toggle the visibility
   };
 
-  console.log(dropValue);
   for (let i = 0; i < products.length; i++) {
     console.log(products[i].category);
     if (products[i].category !== dropValue) {
     }
   }
-  // const dropdownValues = () => {
 
   return (
     <div className="homepage-container">

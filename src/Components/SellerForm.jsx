@@ -20,7 +20,7 @@ const SellerForm = () => {
 
   return (
     <Form>
-      <Form.Row>
+      {/* <Form.Row> */}
         <Form.Group as={Col}>
           <Form.Label>Product Name</Form.Label>
           <Form.Control
@@ -44,7 +44,7 @@ const SellerForm = () => {
             required
           />
         </Form.Group>
-      </Form.Row>
+      {/* </Form.Row> */}
       <Form.Group>
         <Form.Label>Condition</Form.Label>
         <Form.Control
