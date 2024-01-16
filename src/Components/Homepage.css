@@ -1,0 +1,15 @@
+.homepage-container {
+  /* Ensures the container takes full width */
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between; /* Aligns items on opposite ends */
+  align-items: center; /* Centers items vertically */
+  padding: 10px; /* Add padding as needed */
+}
+
+.sell-button {
+  margin-left: auto; /* This will push your button to the right */
+}
