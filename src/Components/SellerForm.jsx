@@ -86,11 +86,11 @@ const SellerForm = () => {
           required
         >
           <option value="">Choose...</option>
-          <option value="chemistry">Chemistry</option>
-          <option value="biology">Biology</option>
-          <option value="economics">Economics</option>
-          <option value="computer science">Computer Science</option>
-          <option value="english">English</option>
+          <option value="Chemistry">Chemistry</option>
+          <option value="Biology">Biology</option>
+          <option value="Economics">Economics</option>
+          <option value="Computer Science">Computer Science</option>
+          <option value="English">English</option>
           {/* Add other subjects as needed */}
         </Form.Control>
       </Form.Group>
