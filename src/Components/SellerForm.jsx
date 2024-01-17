@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Col } from "react-bootstrap";
 import "./SellerForm.css";
+import { push, getDatabase, ref} from "firebase/database";
 
 const SellerForm = () => {
   const [productDetails, setProductDetails] = useState({
@@ -19,8 +20,20 @@ const SellerForm = () => {
     }));
   };
 
+  const writeProductData = async (productData) => {
+    const db = getDatabase();
+    const profilesRef = ref(db, 'products/');
+    push(profilesRef,  {
+      name: productData.name,
+      price: productData.price,
+      condition: productData.condition,
+      subject: productData.subject,
+      description: productData.description,
+    });
+  }
+
   return (
-    <Form className="seller-form">
+    <Form className="seller-form" onSubmit={() => writeProductData(productDetails)}>
       {/* <Form.Row> */}
         <Form.Group as={Col}>
           <Form.Label>Product Name</Form.Label>
