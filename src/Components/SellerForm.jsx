@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, Col } from "react-bootstrap";
+import "./SellerForm.css";
 
 const SellerForm = () => {
   const [productDetails, setProductDetails] = useState({
@@ -19,7 +20,7 @@ const SellerForm = () => {
   };
 
   return (
-    <Form>
+    <Form className="seller-form">
       {/* <Form.Row> */}
         <Form.Group as={Col}>
           <Form.Label>Product Name</Form.Label>
@@ -76,7 +77,8 @@ const SellerForm = () => {
           <option value="biology">Biology</option>
           <option value="economics">Economics</option>
           <option value="computer science">Computer Science</option>
-          // Add other subjects as needed
+          <option value="english">English</option>
+          {/* Add other subjects as needed */}
         </Form.Control>
       </Form.Group>
 
@@ -91,6 +93,7 @@ const SellerForm = () => {
           onChange={handleChange}
         />
       </Form.Group>
+      <br />
       <Button variant="primary" type="submit">
         Submit
       </Button>

@@ -62,6 +62,10 @@ const Homepage = ({ products }) => {
         )}
       </Modal>
 
+      <Modal className="form-modal" open={showForm} close={toggleFormVisibility}>
+        <SellerForm />
+      </Modal>
+
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           {dropValue ? dropValue : "Select a subject"}
@@ -97,7 +101,7 @@ const Homepage = ({ products }) => {
         dropValue={dropValue}
       />
 
-      {showForm && <SellerForm />}
+      {/* {showForm && <SellerForm />} */}
     </div>
   );
 };
