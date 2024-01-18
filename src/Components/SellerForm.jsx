@@ -99,10 +99,10 @@ const SellerForm = () => {
             required
           >
             <option value="">Choose...</option>
-            <option value="new">New</option>
-            <option value="almost new">Almost New</option>
-            <option value="used">Used</option>
-            <option value="fair">Fair</option>
+            <option value="New">New</option>
+            <option value="Almost New">Almost New</option>
+            <option value="Used">Used</option>
+            <option value="Fair">Fair</option>
           </Form.Control>
         </Form.Group>
 
