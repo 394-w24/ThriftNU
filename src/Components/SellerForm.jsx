@@ -10,6 +10,7 @@ const SellerForm = () => {
     condition: "",
     subject: "",
     description: "",
+    file: "",
   });
 
   const handleChange = (e) => {
@@ -29,7 +30,7 @@ const SellerForm = () => {
       condition: productData.condition,
       subject: productData.subject,
       description: productData.description,
-      // image
+      imageURL: productData.file,
       seller: productData.seller,
       email: productData.email,
     });
@@ -39,9 +40,9 @@ const SellerForm = () => {
     <div>
 
       <Form className="seller-form" onSubmit={() => writeProductData(productDetails)}>
-        <h1>Sell an item!</h1>
+        <h1>Sell a Textbook!</h1>
         {/* <Form.Row> */}
-        <Form.Group as={Col}>
+        <Form.Group as={Col}  className="form-group">
           <Form.Label>Your Name</Form.Label>
           <Form.Control
             type="text"
@@ -53,7 +54,7 @@ const SellerForm = () => {
           />
         </Form.Group>
 
-        <Form.Group as={Col}>
+        <Form.Group as={Col}  className="form-group">
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="text"
@@ -65,7 +66,7 @@ const SellerForm = () => {
           />
         </Form.Group>
 
-        <Form.Group as={Col}>
+        <Form.Group as={Col}  className="form-group">
           <Form.Label>Product Name</Form.Label>
           <Form.Control
             type="text"
@@ -77,7 +78,7 @@ const SellerForm = () => {
           />
         </Form.Group>
 
-        <Form.Group as={Col}>
+        <Form.Group as={Col}  className="form-group">
           <Form.Label>Price</Form.Label>
           <Form.Control
             type="number"
@@ -89,7 +90,7 @@ const SellerForm = () => {
           />
         </Form.Group>
         {/* </Form.Row> */}
-        <Form.Group>
+        <Form.Group className="form-group">
           <Form.Label>Condition</Form.Label>
           <Form.Control
             as="select"
@@ -106,7 +107,7 @@ const SellerForm = () => {
           </Form.Control>
         </Form.Group>
 
-      <Form.Group>
+      <Form.Group className="form-group">
         <Form.Label>Subject</Form.Label>
         <Form.Control
           as="select"
@@ -125,17 +126,27 @@ const SellerForm = () => {
         </Form.Control>
       </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            placeholder="Enter description (optional)"
-            name="description"
-            value={productDetails.description}
-            onChange={handleChange}
-          />
-        </Form.Group>
+      <Form.Group className="form-group">
+        <Form.Label>Description</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={3}
+          placeholder="Enter description (optional)"
+          name="description"
+          value={productDetails.description}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Form.Group controlId="formFile" className="mb-3">
+        <Form.Label>Textbook Image</Form.Label>
+        <Form.Control 
+        type="file"
+        name="file"
+        value={productDetails.file}
+        onChange={handleChange}
+        required
+        />
+      </Form.Group>
         <br />
         <Button variant="primary" type="submit">
           Submit
