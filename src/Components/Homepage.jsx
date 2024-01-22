@@ -24,10 +24,16 @@ const Homepage = ({ products }) => {
 
   return (
     <div className="homepage-container">
-      <div className="header">
+      {/* Adjusted div structure and class names for styling */}
+      <div className="text-center header">
         <h1>ThriftNU</h1>
-        <button onClick={toggleFormVisibility} className="sell-button">
-          {showForm ? "Hide Form" : "Sell an Item"}
+      </div>
+      <div className="text-center">
+        <button
+          onClick={toggleFormVisibility}
+          className="btn btn-primary sell-button my-3"
+        >
+          {showForm ? "Hide Form" : "Click here to sell an Item"}
         </button>
       </div>
 
@@ -62,12 +68,20 @@ const Homepage = ({ products }) => {
         )}
       </Modal>
 
-      <Modal className="form-modal" open={showForm} close={toggleFormVisibility}>
+      <Modal
+        className="form-modal"
+        open={showForm}
+        close={toggleFormVisibility}
+      >
         <SellerForm />
       </Modal>
 
       <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown.Toggle
+          variant="success"
+          id="dropdown-basic"
+          className="custom-dropdown"
+        >
           {dropValue ? dropValue : "Select a subject"}
         </Dropdown.Toggle>
 

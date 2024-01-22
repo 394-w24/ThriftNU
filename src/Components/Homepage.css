@@ -3,13 +3,38 @@
   width: 100%;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between; /* Aligns items on opposite ends */
-  align-items: center; /* Centers items vertically */
-  padding: 10px; /* Add padding as needed */
+/* Homepage.css */
+
+/* For the dropdown */
+.custom-dropdown {
+  font-size: 2rem !important;
+  padding: 1rem 2.5rem !important;
+  color: white;
+  border-radius: 0.25rem;
 }
 
+/* For the button */
 .sell-button {
-  margin-left: auto; /* This will push your button to the right */
+  font-size: 2rem !important;
+  padding: 2rem 3rem !important;
+  color: white;
+  border-radius: 0.25rem;
+  margin-left: auto;
+}
+
+.header h1 {
+  font-family: "Grape Nuts", cursive;
+  color: #2848fd;
+  font-size: 6rem !important;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.my-3 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
