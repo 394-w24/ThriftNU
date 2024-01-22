@@ -1,0 +1,41 @@
+/* Profile.css */
+.app-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Adjust the height as needed */
+  }
+  
+  .profile {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
+  }
+  .profile h2 {
+    color: #4b0082; /* Purple color for the heading */
+  }
+  
+  .profile h3 {
+    color: #333;
+  }
+  
+  .textbook-post {
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Add an icon for visual appeal */
+  .icon {
+    color: #4b0082; /* Purple color for the icon */
+    font-size: 24px;
+    margin-right: 5px;
+  }
+  
