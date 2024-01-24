@@ -4,6 +4,7 @@ import Modal from "./Modal";
 import Dropdown from "react-bootstrap/Dropdown";
 import SellerForm from "./SellerForm";
 import "./Homepage.css";
+import SearchBar from "./SearchBar";
 
 const Homepage = ({ products }) => {
   const [selected, setSelected] = useState(null);
@@ -15,6 +16,24 @@ const Homepage = ({ products }) => {
   const toggleFormVisibility = () => {
     setShowForm(!showForm); // Toggle the visibility
   };
+
+  // search bar logic
+  const [searchTextbooks, setSearchTextbooks] = useState("");
+  function onSearch(searchTerm) {
+    if (searchTerm === "") {
+      setSearchTextbooks(products);
+      return;
+    }
+    const productNames = Object.values(products); // { {product1}, {product2}, ... } --> [{product1}, {product2}, ...]
+    const filteredProducts = productNames.filter((productName) => {
+      return (
+        productName.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        productName.subject.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    });
+    setSearchTextbooks(filteredProducts);
+  }
+  
 
   for (let i = 0; i < products.length; i++) {
     console.log(products[i].category);
@@ -75,7 +94,11 @@ const Homepage = ({ products }) => {
       >
         <SellerForm />
       </Modal>
-
+      
+      <div className="searchbar">
+        <SearchBar onSearch={onSearch} />
+      </div>
+      
       <Dropdown>
         <Dropdown.Toggle
           variant="success"
@@ -109,7 +132,7 @@ const Homepage = ({ products }) => {
       </Dropdown>
 
       <ItemList
-        items={products}
+        items={searchTextbooks} // changed from products to searchTextbooks
         setSelectedItem={setSelected}
         openModal={openModal}
         dropValue={dropValue}
