@@ -28,8 +28,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="logo-container">
-        {/* Insert your logo image source here */}
-        <img className="logo" src="path-to-your-logo-image" alt="ThriftNU Logo" />
+      <img className="logo" src={process.env.PUBLIC_URL + '/ThriftNU_logo.png'} alt="ThriftNU Logo" />
         <h2>ThriftNU</h2>
       </div>
       <h2>Login</h2>
@@ -48,8 +47,8 @@ const Login = () => {
       <button className="login-button" onClick={handleLogin}>Log In</button>
       <button className="login-button" onClick={handleGoogleSignIn}>Sign In with Google</button>
       <div className="thriftnu-info">
-        {/* Additional ThriftNU info or link */}
-        <p>Discover amazing thrift finds at <Link to="/homepage">ThriftNU</Link></p>
+        {/* Additional ThriftNU will go here, not currently working though*/}
+        <p>Amazing thrift finds at <Link to="/homepage">ThriftNU</Link></p>
       </div>
     </div>
   );

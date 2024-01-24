@@ -56,9 +56,6 @@
   .login-button:hover {
     background-color: #2c005a;
   }
-  
-  /* Additional comment indicating ThriftNU info */
-  /* Adjust the styling based on design preferences */
   .thriftnu-info {
     font-style: italic;
     color: #333;

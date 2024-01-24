@@ -13,10 +13,12 @@ const user = {
   textbooksToBuy: [
     { id: 1, title: 'Book A', author: 'Author A' },
     // Add other textbooks to buy
+    //Still figuring out Firebase stuff will come to this later
   ],
   textbooksToSell: [
     { id: 2, title: 'Book B', author: 'Author B' },
     // Add other textbooks to sell
+    //Still figuring out Firebase stuff will come to this later
   ],
 };
 
