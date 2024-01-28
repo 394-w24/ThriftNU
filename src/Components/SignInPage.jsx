@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import thriftNuLogo from './logo.png';
 import { useNavigate } from 'react-router-dom';
-import "./SignInPage.css"; // Import the CSS file
-
+import "./SignInPage.css"; 
 function SignInPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,7 +17,7 @@ function SignInPage() {
   return (
     <div className="signin-container">
       <div className="logo-container">
-        {/* Replace the path with your actual logo path */}
+
         <img src={thriftNuLogo} alt="ThriftNu Logo" className="thrift-nu-logo" />
         <div className="thrift-nu-text">ThriftNu</div>
         <div className="tagline">A Cheaper Solution for Books</div>

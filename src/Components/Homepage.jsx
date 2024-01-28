@@ -65,11 +65,14 @@ const Homepage = ({ products }) => {
       {/* Adjusted div structure and class names for styling */}
       <div className="text-center header">
         <h1>ThriftNU</h1>
-
-        {/* Navigate to the profile */}
-        <Link to="/signin">User Profile</Link>
+        <div className="user-profile-info">
+          <h3>Welcome, to ThriftNU</h3>
+            <div className="user-profile-link">
+              <Link to="/profile">View Your Profile</Link>
+            </div>
+        </div>
       </div>
-      <div className="text-center">
+    <div className="text-center">
         <button
           onClick={toggleFormVisibility}
           className="btn btn-primary sell-button my-3"

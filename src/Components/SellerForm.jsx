@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Button, Form, Col } from "react-bootstrap";
 import "./SellerForm.css";
 import { push, getDatabase, ref } from "firebase/database";
+import { useNavigate } from 'react-router-dom';
 
 const SellerForm = () => {
+  const navigate = useNavigate();
   const [productDetails, setProductDetails] = useState({
     name: "",
     price: "",
@@ -34,6 +36,8 @@ const SellerForm = () => {
       seller: productData.seller,
       email: productData.email,
     });
+     // Navigate to homepage after successful submission
+     navigate('/home');
   }
 
   return (
@@ -157,3 +161,4 @@ const SellerForm = () => {
 };
 
 export default SellerForm;
+

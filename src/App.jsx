@@ -40,29 +40,28 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Show SignIn Page first */}
-        <Route
-          path="/"
-          element={<SignInPage isAuthenticated={isAuthenticated} />}
-        />
+        {/* Homepage Route */}
+        <Route path="/home" element={<Homepage products={products} />} /> 
 
-        {/* Home Page rendered after login */}
+        {/* SignInPage Route */}
+        <Route path="/" element={<SignInPage />} />
+        {/* ProfilePage Route */}
         <Route
-          path="/home"
+          path="/profile"
           element={
             isAuthenticated ? (
-              <Homepage products={products} />
+              <ProfilePage
+                products={products}
+                onBackToHomepage={() => {
+                  // Callback to navigate back to the homepage
+                  return <Navigate to="/home" />;
+                }}
+              />
             ) : (
               <Navigate to="/" />
             )
           }
         />
-
-        {/* Private Route */}
-        <Route path="/profile" element={<ProfilePage />} />
-
-        {/* Profile Route */}
-        <Route path="/*" element={<div className="App">Will retrieve the list of books from db, or record each time the SellerForm is filled</div>} />
       </Routes>
     </BrowserRouter>
   );
