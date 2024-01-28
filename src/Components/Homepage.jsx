@@ -1,12 +1,17 @@
 import ItemList from "./ItemList";
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';//chnaged to this
 import Modal from "./Modal";
 import Dropdown from "react-bootstrap/Dropdown";
 import SellerForm from "./SellerForm";
 import "./Homepage.css";
 import SearchBar from "./SearchBar";
+import { getSoldBooks } from './api';
+
+import { Link } from 'react-router-dom';
+
 
 const Homepage = ({ products }) => {
+
   const [selected, setSelected] = useState(null);
   const [open, setOpen] = useState(false);
   const [dropValue, setDropValue] = useState(null);
@@ -33,19 +38,36 @@ const Homepage = ({ products }) => {
     });
     setSearchTextbooks(filteredProducts);
   }
-  
 
-  for (let i = 0; i < products.length; i++) {
-    console.log(products[i].category);
-    if (products[i].category !== dropValue) {
-    }
-  }
+    // User sold books logic
+    const [userSoldBooks, setUserSoldBooks] = useState([]);
+
+    useEffect(() => {
+      async function fetchUserSoldBooks() {
+        try {
+          const soldBooks = await getSoldBooks(); // Assuming getSoldBooks does not require userId
+          setUserSoldBooks(soldBooks);
+        } catch (error) {
+          console.error("Error fetching user sold books:", error);
+        }
+      }
+
+      fetchUserSoldBooks();
+    }, []);
+      for (let i = 0; i < products.length; i++) {
+        console.log(products[i].category);
+        if (products[i].category !== dropValue) {
+        }
+      }
 
   return (
     <div className="homepage-container">
       {/* Adjusted div structure and class names for styling */}
       <div className="text-center header">
         <h1>ThriftNU</h1>
+
+        {/* Navigate to the profile */}
+        <Link to="/signin">User Profile</Link>
       </div>
       <div className="text-center">
         <button
@@ -55,6 +77,7 @@ const Homepage = ({ products }) => {
           {showForm ? "Hide Form" : "Click here to sell an Item"}
         </button>
       </div>
+     
 
       <Modal open={open} close={closeModal}>
         {selected ? (
