@@ -21,13 +21,15 @@ const Homepage = ({ products }) => {
   const toggleFormVisibility = () => {
     setShowForm(!showForm); // Toggle the visibility
   };
+  
+  const [searchTextbooks, setSearchTextbooks] = useState([]);
+  useEffect(() => {
+    setSearchTextbooks(products);  // Set searchTextbooks initially with products
+  }, [products]);
 
-  // search bar logic
-  const [searchTextbooks, setSearchTextbooks] = useState("");
   function onSearch(searchTerm) {
     if (searchTerm === "") {
       setSearchTextbooks(products);
-      return;
     }
     const productNames = Object.values(products); // { {product1}, {product2}, ... } --> [{product1}, {product2}, ...]
     const filteredProducts = productNames.filter((productName) => {
@@ -120,7 +122,8 @@ const Homepage = ({ products }) => {
       >
         <SellerForm />
       </Modal>
-      
+
+      {console.log(searchTextbooks)}
       <div className="searchbar">
         <SearchBar onSearch={onSearch} />
       </div>
