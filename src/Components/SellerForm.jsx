@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button, Form, Col } from "react-bootstrap";
 import "./SellerForm.css";
 import { push, getDatabase, ref } from "firebase/database";
 import { useNavigate } from 'react-router-dom';
+import uploadImage from "../util/uploadImage";
 
 const SellerForm = () => {
   const navigate = useNavigate();
@@ -11,33 +12,54 @@ const SellerForm = () => {
     price: "",
     condition: "",
     subject: "",
-    description: "",
-    file: "",
+    description: ""
   });
+  const [imageFile, setImageFile] = useState(null);
+  const imageInputRef = useRef();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // console.log(e.target)
     setProductDetails((prevDetails) => ({
       ...prevDetails,
       [name]: value,
     }));
   };
 
-  const writeProductData = async (productData) => {
-    const db = getDatabase();
-    const profilesRef = ref(db, 'products/');
-    push(profilesRef, {
-      name: productData.name,
-      price: productData.price,
-      condition: productData.condition,
-      subject: productData.subject,
-      description: productData.description,
-      imageURL: productData.file,
-      seller: productData.seller,
-      email: productData.email,
-    });
+  const handleFileChange = (e) => {
+    // const { name, value } = e.target;
+    // console.log(imageInputRef.current.files[0])
+
+    setImageFile(imageInputRef.current.files[0]);
+    console.log(imageFile);
+    // setProductDetails((prevDetails) => ({
+    //   ...prevDetails,
+    //   ['file']: imageInputRef.current.files[0],
+    // }));
+    // console.log('productDetails.file='+productDetails.file);
+  };
+
+  const writeProductData = (productData) => {
+    const imageURL = uploadImage(imageFile);
+    console.log('imageURL='+imageURL);
+
+    if (imageURL) {
+      const db = getDatabase();
+      const profilesRef = ref(db, 'products/');
+      push(profilesRef, {
+        name: productData.name,
+        price: productData.price,
+        condition: productData.condition,
+        subject: productData.subject,
+        description: productData.description,
+        imageURL: imageURL,
+        seller: productData.seller,
+        email: productData.email,
+      });
+    };
+
      // Navigate to homepage after successful submission
-     navigate('/home');
+    //  navigate('/home');
   }
 
   return (
@@ -146,8 +168,8 @@ const SellerForm = () => {
         <Form.Control 
         type="file"
         name="file"
-        value={productDetails.file}
-        onChange={handleChange}
+        onChange={handleFileChange}
+        ref={imageInputRef}
         required
         />
       </Form.Group>
