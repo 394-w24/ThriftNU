@@ -1,18 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import thriftNuLogo from './logo.png';
 import { useNavigate } from 'react-router-dom';
 import "./SignInPage.css"; 
+import {useAuthState} from "react-firebase-hooks/auth";
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import {auth} from "../firebase";
+
+
+
 function SignInPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [user, loading, error]= useAuthState(auth);
+  
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Simulate a successful sign-in
-    navigate('/home');
   };
+    useEffect(() =>{
+      if (loading){
+        return;
+      }
+      if (user)
+      navigate('/home');
+   }, [user, loading]);
 
   return (
     <div className="signin-container">
@@ -46,7 +58,8 @@ function SignInPage() {
               required 
             />
           </div>
-          <button type="submit">Sign In</button>
+          <button type="submit">Log In</button>
+          onClick={() => signInWithEmailAndPassword(email, password)}
         </form>
       </div>
     </div>
