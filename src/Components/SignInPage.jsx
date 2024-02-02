@@ -58,8 +58,9 @@ function SignInPage() {
               required 
             />
           </div>
-          <button type="submit">Log In</button>
-          onClick={() => signInWithEmailAndPassword(email, password)}
+          <button type="submit" onClick={() => signInWithEmailAndPassword(email, password)}>
+            Log In
+          </button>
         </form>
       </div>
     </div>
