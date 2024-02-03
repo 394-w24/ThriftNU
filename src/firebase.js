@@ -2,6 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
+import { getStorage, ref } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -12,12 +13,13 @@ const firebaseConfig = {
   messagingSenderId: "874429241561",
   appId: "1:874429241561:web:19c225e2f0e6931ac746c8",
   databaseURL: "https://thriftnu-59202-default-rtdb.firebaseio.com",
-  storageBucket: "thriftnu-59202.appspot.com",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
+const storage = getStorage();
+const storageRef = ref(storage);
 
-export { auth, database };
+export { auth, database, storage };
