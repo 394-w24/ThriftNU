@@ -1,14 +1,12 @@
 import React, { useState, useRef } from "react";
 import { Button, Form, Col } from "react-bootstrap";
 import "./SellerForm.css";
-import { push, getDatabase, ref } from "firebase/database";
-import { useNavigate } from 'react-router-dom';
 import uploadImage from "../util/uploadImage";
 
-const SellerForm = () => {
-  const navigate = useNavigate();
+const SellerForm = ({ userEmail }) => {
   const [productDetails, setProductDetails] = useState({
     name: "",
+    email: userEmail,
     price: "",
     condition: "",
     subject: "",
@@ -86,11 +84,9 @@ const SellerForm = () => {
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter your email"
             name="email"
             value={productDetails.email}
-            onChange={handleChange}
-            required
+            disabled
           />
         </Form.Group>
 
