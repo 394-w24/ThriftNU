@@ -128,7 +128,7 @@ const Homepage = ({ products }) => {
         <SearchBar onSearch={onSearch} />
       </div>
       
-      <Dropdown>
+      {/* <Dropdown>
         <Dropdown.Toggle
           variant="success"
           id="dropdown-basic"
@@ -158,7 +158,7 @@ const Homepage = ({ products }) => {
             </Dropdown.Item>
           ))}
         </Dropdown.Menu>
-      </Dropdown>
+      </Dropdown> */}
 
       <ItemList
         items={searchTextbooks} // changed from products to searchTextbooks
