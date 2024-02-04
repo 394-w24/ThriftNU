@@ -43,10 +43,7 @@
   }
   
   /* Book details styling */
-  div {
-    margin-bottom: 5px;
-    color: #4E2A84; /* Slightly darker purple text */
-  }
+ 
   
   /* Price styling */
   div:nth-child(2) {

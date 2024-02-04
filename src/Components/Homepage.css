@@ -10,6 +10,10 @@
 
 /* Custom dropdown styling */
 .custom-dropdown {
+  display: flex;
+  justify-content: center; /* Centers dropdown horizontally */
+  align-items: center; /* Centers dropdown vertically */
+  margin-top: 20px; 
   font-size: 1.5rem;
   padding: 1rem 2.5rem;
   color: #571340;
@@ -81,3 +85,9 @@
   font-size: 2rem;
   margin-bottom: 10px;
 }
+.dropdown-container {
+  width: 100%; /* Full width to center the dropdown */
+  text-align: center; /* Center the dropdown toggle */
+  padding-top: 10px; /* Adjust as needed */
+}
+
