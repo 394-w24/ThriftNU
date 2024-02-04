@@ -15,30 +15,33 @@ function App() {
   const [products, setProducts] = useState([]);
   const auth = getAuth();
 
-  useEffect(() => {
-    const checkAuthentication = () => {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          setIsAuthenticated(true);
-        }
-      });
-    };
-
-    const fetchData = async () => {
-      try {
-        const dbRef = getDbRef(database);
-        const snapshot = await get(dbRef);
-
-        if (snapshot.exists()) {
-          setProducts(snapshot.val()['products']);
-        } else {
-          console.log('No data available');
-        }
-      } catch (error) {
-        console.error(error);
+  // steven: maybe move "checkAuth" and "fetchData" function declaratoins 
+  // outside of the useEffect so that fetchData can be exported when we need to refresh the page
+  // sometimes (ProfilePage.jsx)
+  const checkAuthentication = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true);
       }
-    };
+    });
+  };
 
+  const fetchData = async () => {
+    try {
+      const dbRef = getDbRef(database);
+      const snapshot = await get(dbRef);
+
+      if (snapshot.exists()) {
+        setProducts(snapshot.val()['products']);
+      } else {
+        console.log('No data available');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
     checkAuthentication();
     fetchData();
   }, []);
@@ -59,6 +62,7 @@ function App() {
             isAuthenticated ? (
               <ProfilePage
                 products={products}
+                updateData={fetchData}
               />
             ) : (
               <Navigate to="/" />
