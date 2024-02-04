@@ -66,7 +66,7 @@ const SellerForm = () => {
 
   return (
     <div>
-
+      <p className="scroll-instructions">Scroll down to see more options</p>
       <Form className="seller-form" onSubmit={() => writeProductData(productDetails)}>
         <h1>Sell a Textbook!</h1>
         {/* <Form.Row> */}
