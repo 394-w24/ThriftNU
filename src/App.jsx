@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import { ref as getDbRef, get } from 'firebase/database';
-import SignInPage from './Components/SignInPage';
+
+import SignUp from './Components/SignUpPage';
+
 import Homepage from './Components/Homepage';
 import ProfilePage from './Components/ProfilePage';
 import { auth, database } from './firebase';
+import SignIn from './Components/SignInPage';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -44,7 +47,8 @@ function App() {
         <Route path="/home" element={<Homepage products={products} />} /> 
 
         {/* SignInPage Route */}
-        <Route path="/" element={<SignInPage />} />
+        <Route path="/register" element={<SignUp />} />
+        <Route path="/" element={<SignIn />} />
         {/* ProfilePage Route */}
         <Route
           path="/profile"
