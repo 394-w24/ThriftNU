@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import thriftNuLogo from './logo.png';
 import { useNavigate } from 'react-router-dom';
 import "./SignInPage.css"; 
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../firebase';
 function SignInPage() {
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [user, loading, error]= useAuthState(auth);
+  
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const handleRegister = async (event) => {
@@ -24,16 +24,9 @@ function SignInPage() {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Form submitted', { email, password });
 
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log('Signed in user:', userCredential.user);
-      navigate('/home'); // Navigate to the home page on successful sign-in
-    } catch (err) {
-      console.error('Sign in error:', err);
-      setError(err.message); // Set error message to display to the user
-    }
+    // Simulate a successful sign-in
+    navigate('/home');
   };
 
   return (
@@ -68,7 +61,8 @@ function SignInPage() {
               required 
             />
           </div>
-          <button type="submit">Sign In</button>
+          <button type="submit">Log In</button>
+          onClick={() => signInWithEmailAndPassword(email, password)}
         </form>
         <form onSubmit={handleRegister}>
           <div className="form-group">
