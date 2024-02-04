@@ -10,56 +10,52 @@ const mockSoldBooks = [
   { id: 3, bookTitle: 'Data Structures in Python', price: 30, dateSold: '2022-03-20' },
 ];
 
-async function fetchUserData(userId) {
-  // Replace with actual fetch calls
-  const name = "User"; // Replace with getUserName(userId) - if firebase works
-  const purchases = []; // Replace with getPurchases(userId)
-  const soldBooks = mockSoldBooks; // Replace with getSoldBooks(userId)
-  return { name, purchases, soldBooks };
-}
+// async function fetchUserData(userId) {
+//   // Replace with actual fetch calls
+//   const name = "User"; // Replace with getUserName(userId) - if firebase works
+//   const purchases = []; // Replace with getPurchases(userId)
+//   const soldBooks = mockSoldBooks; // Replace with getSoldBooks(userId)
+//   return { name, purchases, soldBooks };
+// }
 
-function ProfilePage({ userId, products }) {
-  const [userData, setUserData] = useState({});
+function ProfilePage({ products }) {
+  // const [userData, setUserData] = useState({});
   const [userEmail, setUserEmail] = useState('');
   // console.log(products);
   const auth = getAuth();
 
+  useEffect(() => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       setUserEmail(user.email);
     }
   });
+}, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const userData = await fetchUserData(userId);
-        setUserData(userData);
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    }
+  const user_books = Object.values(products).filter((product) => product.email === userEmail);
 
-    fetchData();
-  }, [userId]);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const userData = await fetchUserData(userId);
+  //       setUserData(userData);
+  //     } catch (error) {
+  //       console.error('Error fetching user data:', error);
+  //     }
+  //   }
 
-  const { name, purchases, soldBooks } = userData;
+  //   fetchData();
+  // }, [userId]);
+
+  // const { name, purchases, soldBooks } = userData;
 
   return (
     <div>
-      <h2>Welcome back, {name}</h2>
-      {/* Display sold books */}
+      <h2>Welcome back</h2>
       <div className="user-sold-books">
-        <h2>Here are the books you sold</h2>
+        <h2>Books you are selling:</h2>
         <ul style={{ paddingRight: '2rem' }}>
-          {soldBooks && soldBooks.map((soldBook) => (
-            <li key={soldBook.id}>
-              <div>{soldBook.bookTitle}</div>
-              <div>${soldBook.price}</div>
-              <div>{soldBook.dateSold}</div>
-            </li>
-          ))}
-          {Object.values(products).filter((product) => product.email === userEmail).map((item, id) =>
+          {user_books.filter((product) => !product.sold).map((item, id) =>
             <li key={id}>
               <div style={{ display: 'flex', justifyContent: 'start' }}>
                 <img className="card-img-top" src={item.imageURL} alt="product" style={{ paddingRight: '20px', maxWidth: '150px' }} />
@@ -71,9 +67,29 @@ function ProfilePage({ userId, products }) {
               </div>
             </li>
           )}
-          {/* </div> */}
         </ul>
       </div>
+      {/* Display sold books */}
+      <div className="user-sold-books">
+        <h2>Sold books:</h2>
+        {user_books.filter((product) => product.sold) ? <p>You have not sold any books yet</p> : 
+        <ul style={{ paddingRight: '2rem' }}>
+          {user_books.filter((product) => product.sold).map((item, id) =>
+            <li key={id}>
+              <div style={{ display: 'flex', justifyContent: 'start' }}>
+                <img className="card-img-top" src={item.imageURL} alt="product" style={{ paddingRight: '20px', maxWidth: '150px' }} />
+                <li style={{border: "0px"}}>
+                <div className='profile-text'><b>{item.name}</b></div>
+                <div className='profile-text'>${item.price}</div>
+                <div className='profile-text'>{item.condition}</div>
+              </li>
+              </div>
+            </li>
+          )}
+        </ul>}
+      </div>
+
+      
 
       {/* Button to navigate back to the homepage */}
       <Link to="/home">
