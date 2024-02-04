@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { ref as getDbRef, get } from 'firebase/database';
 
 import SignUp from './Components/SignUpPage';
@@ -13,12 +13,15 @@ import SignIn from './Components/SignInPage';
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [products, setProducts] = useState([]);
+  const auth = getAuth();
 
   useEffect(() => {
     const checkAuthentication = () => {
-      // You can add your authentication check logic here
-      // For now, let's set it to true unconditionally
-      setIsAuthenticated(true);
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          setIsAuthenticated(true);
+        }
+      });
     };
 
     const fetchData = async () => {
@@ -56,10 +59,6 @@ function App() {
             isAuthenticated ? (
               <ProfilePage
                 products={products}
-                onBackToHomepage={() => {
-                  // Callback to navigate back to the homepage
-                  return <Navigate to="/home" />;
-                }}
               />
             ) : (
               <Navigate to="/" />

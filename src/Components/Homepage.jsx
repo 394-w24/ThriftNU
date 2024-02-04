@@ -1,13 +1,13 @@
 import ItemList from "./ItemList";
 import React, { useState, useEffect } from 'react';//chnaged to this
 import Modal from "./Modal";
-import Dropdown from "react-bootstrap/Dropdown";
 import SellerForm from "./SellerForm";
 import "./Homepage.css";
 import SearchBar from "./SearchBar";
 import { getSoldBooks } from './api';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 const Homepage = ({ products }) => {
@@ -21,6 +21,15 @@ const Homepage = ({ products }) => {
   const toggleFormVisibility = () => {
     setShowForm(!showForm); // Toggle the visibility
   };
+  const auth = getAuth();
+  const navigate = useNavigate();
+
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      navigate('/');
+    }
+    console.log(user);
+  });
   
   const [searchTextbooks, setSearchTextbooks] = useState([]);
   useEffect(() => {
@@ -123,7 +132,6 @@ const Homepage = ({ products }) => {
         <SellerForm />
       </Modal>
 
-      {console.log(searchTextbooks)}
       <div className="searchbar">
         <SearchBar onSearch={onSearch} />
       </div>

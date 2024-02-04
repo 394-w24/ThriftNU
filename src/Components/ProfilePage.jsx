@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import './ProfilePage.css'; // Import the CSS file
 
 // Mock data to replace actual fetch calls
@@ -17,8 +18,17 @@ async function fetchUserData(userId) {
   return { name, purchases, soldBooks };
 }
 
-function ProfilePage({ userId }) {
+function ProfilePage({ userId, products }) {
   const [userData, setUserData] = useState({});
+  const [userEmail, setUserEmail] = useState('');
+  // console.log(products);
+  const auth = getAuth();
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setUserEmail(user.email);
+    }
+  });
 
   useEffect(() => {
     async function fetchData() {
@@ -41,7 +51,7 @@ function ProfilePage({ userId }) {
       {/* Display sold books */}
       <div className="user-sold-books">
         <h2>Here are the books you sold</h2>
-        <ul>
+        <ul style={{ paddingRight: '2rem' }}>
           {soldBooks && soldBooks.map((soldBook) => (
             <li key={soldBook.id}>
               <div>{soldBook.bookTitle}</div>
@@ -49,6 +59,19 @@ function ProfilePage({ userId }) {
               <div>{soldBook.dateSold}</div>
             </li>
           ))}
+          {Object.values(products).filter((product) => product.email === userEmail).map((item, id) =>
+            <li key={id}>
+              <div style={{ display: 'flex', justifyContent: 'start' }}>
+                <img className="card-img-top" src={item.imageURL} alt="product" style={{ paddingRight: '20px', maxWidth: '150px' }} />
+                <li style={{border: "0px"}}>
+                <div className='profile-text'><b>{item.name}</b></div>
+                <div className='profile-text'>${item.price}</div>
+                <div className='profile-text'>{item.condition}</div>
+              </li>
+              </div>
+            </li>
+          )}
+          {/* </div> */}
         </ul>
       </div>
 
