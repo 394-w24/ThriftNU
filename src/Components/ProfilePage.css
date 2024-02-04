@@ -71,3 +71,27 @@
   .profile-text {
     font-size: 1.25rem;
   }
+
+  .button-not-sold {
+    background-color: #6A0572; /* Northwestern purple for the button */
+    color: #FFFFFF; /* White text for the button */
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .button-not-sold:hover {
+    background-color: #4E2A84; /* Slightly darker purple on hover */
+  }
+
+  .button-sold {
+    background-color: #6A0572; /* Slightly darker purple on hover */
+    color: #FFFFFF; /* White text for the button */
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .button-sold:hover {
+    background-color: #4E2A84; /* Northwestern purple for the button */
+  }
