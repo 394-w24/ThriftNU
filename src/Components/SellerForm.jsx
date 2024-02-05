@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
 import { Button, Form, Col } from "react-bootstrap";
 import "./SellerForm.css";
-import uploadImage from "../util/uploadImage";
+import { useNavigate } from 'react-router-dom';
+import writeProductData from "../util/writeProductData";
 
 const SellerForm = ({ userEmail }) => {
   const [productDetails, setProductDetails] = useState({
@@ -13,7 +14,6 @@ const SellerForm = ({ userEmail }) => {
     description: ""
   });
   const [imageFile, setImageFile] = useState(null);
-  const [imageURL, setImageURL] = useState('');
   const imageInputRef = useRef();
 
   const handleChange = (e) => {
@@ -26,46 +26,20 @@ const SellerForm = ({ userEmail }) => {
   };
 
   const handleFileChange = (e) => {
-    // const { name, value } = e.target;
-    // console.log(imageInputRef.current.files[0])
-
     setImageFile(imageInputRef.current.files[0]);
-    // setProductDetails((prevDetails) => ({
-    //   ...prevDetails,
-    //   ['file']: imageInputRef.current.files[0],
-    // }));
-    // console.log('productDetails.file='+productDetails.file);
   };
 
-  const writeProductData = async (productData, imageFile) => {
-    console.log(imageFile);
-    setImageURL(await uploadImage(imageFile));
-    console.log('imageURL=' + imageURL);
-
-    if (imageURL) {
-      console.log("If this runs, I think the problem is solved.")
-      // const db = getDatabase();
-      // const profilesRef = ref(db, 'products/');
-      // push(profilesRef, {
-      //   name: productData.name,
-      //   price: productData.price,
-      //   condition: productData.condition,
-      //   subject: productData.subject,
-      //   description: productData.description,
-      //   imageURL: imageURL,
-      //   seller: productData.seller,
-      //   email: productData.email,
-      // });
-    };
+  const handleSubmit = (productDetails, imageFile) => {
+    writeProductData(productDetails, imageFile);
 
     // Navigate to homepage after successful submission
-    //  navigate('/home');
+    navigate('/home');
   }
 
   return (
     <div>
       <p className="scroll-instructions">Scroll down to see more options</p>
-      <Form className="seller-form" onSubmit={() => writeProductData(productDetails)}>
+      <Form className="seller-form" onSubmit={() => handleSubmit(productDetails, imageFile)}>
         <h1>Sell a Textbook!</h1>
         {/* <Form.Row> */}
         <Form.Group as={Col} className="form-group">
@@ -172,11 +146,10 @@ const SellerForm = ({ userEmail }) => {
           />
         </Form.Group>
         <br />
-        <Button variant="primary" type="submit">
+        <Button variant="primary" onClick={() => handleSubmit(productDetails, imageFile)}>
           Submit
         </Button>
       </Form>
-      <div onClick={() => writeProductData(productDetails, imageFile)}>CLICK ME FOR DEBUG SUBMIT</div>
     </div>
   );
 };
