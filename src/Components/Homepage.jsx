@@ -135,7 +135,7 @@ const Homepage = ({ products }) => {
         open={showForm}
         close={toggleFormVisibility}
       >
-        <SellerForm userEmail={userEmail} />
+        {userEmail && <SellerForm userEmail={userEmail} />}
       </Modal>
 
       <div className="searchbar">
