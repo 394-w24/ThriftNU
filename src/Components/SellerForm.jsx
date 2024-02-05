@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import writeProductData from "../util/writeProductData";
 
 
-const SellerForm = ({ userEmail }) => {
+const SellerForm = ({ userEmail, toggle }) => {
   const [productDetails, setProductDetails] = useState({
     name: "",
     email: userEmail,
@@ -35,13 +35,13 @@ const SellerForm = ({ userEmail }) => {
     writeProductData(productDetails, imageFile);
     // Show an alert or confirmation message
     alert("Product submitted successfully!");
-      // Log a message before navigating
+    // Log a message before navigating
     console.log("Navigating to /home...");
-      // Navigate to homepage after successful submission
-    navigate('/home');
+    // Navigate to homepage after successful submission
+    toggle();
   }
 
- 
+
   return (
     <div>
       <p className="scroll-instructions">Scroll down to see more options</p>
