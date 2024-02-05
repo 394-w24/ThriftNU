@@ -4,6 +4,7 @@ import "./SellerForm.css";
 import { useNavigate } from 'react-router-dom';
 import writeProductData from "../util/writeProductData";
 
+
 const SellerForm = ({ userEmail }) => {
   const [productDetails, setProductDetails] = useState({
     name: "",
@@ -15,6 +16,7 @@ const SellerForm = ({ userEmail }) => {
   });
   const [imageFile, setImageFile] = useState(null);
   const imageInputRef = useRef();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,11 +33,15 @@ const SellerForm = ({ userEmail }) => {
 
   const handleSubmit = (productDetails, imageFile) => {
     writeProductData(productDetails, imageFile);
-
-    // Navigate to homepage after successful submission
+    // Show an alert or confirmation message
+    alert("Product submitted successfully!");
+      // Log a message before navigating
+    console.log("Navigating to /home...");
+      // Navigate to homepage after successful submission
     navigate('/home');
   }
 
+ 
   return (
     <div>
       <p className="scroll-instructions">Scroll down to see more options</p>
