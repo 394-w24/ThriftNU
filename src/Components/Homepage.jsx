@@ -1,13 +1,13 @@
 import ItemList from "./ItemList";
 import React, { useState, useEffect } from 'react';//chnaged to this
 import Modal from "./Modal";
-import Dropdown from "react-bootstrap/Dropdown";
 import SellerForm from "./SellerForm";
 import "./Homepage.css";
 import SearchBar from "./SearchBar";
 import { getSoldBooks } from './api';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 const Homepage = ({ products }) => {
@@ -16,12 +16,27 @@ const Homepage = ({ products }) => {
   const [open, setOpen] = useState(false);
   const [dropValue, setDropValue] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
   const toggleFormVisibility = () => {
     setShowForm(!showForm); // Toggle the visibility
   };
-  
+  const auth = getAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        navigate('/');
+      } else {
+        setUserEmail(user.email);
+        console.log('userEmail=' + userEmail);
+      }
+
+    });
+  }, [auth, navigate, userEmail]);
+
   const [searchTextbooks, setSearchTextbooks] = useState([]);
   useEffect(() => {
     setSearchTextbooks(products);  // Set searchTextbooks initially with products
@@ -34,33 +49,33 @@ const Homepage = ({ products }) => {
     const productNames = Object.values(products); // { {product1}, {product2}, ... } --> [{product1}, {product2}, ...]
     const filteredProducts = productNames.filter((productName) => {
       return (
-        productName.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        productName.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         productName.subject.toLowerCase().includes(searchTerm.toLowerCase())
       );
     });
     setSearchTextbooks(filteredProducts);
   }
 
-    // User sold books logic
-    const [userSoldBooks, setUserSoldBooks] = useState([]);
+  // User sold books logic
+  const [userSoldBooks, setUserSoldBooks] = useState([]);
 
-    useEffect(() => {
-      async function fetchUserSoldBooks() {
-        try {
-          const soldBooks = await getSoldBooks(); // Assuming getSoldBooks does not require userId
-          setUserSoldBooks(soldBooks);
-        } catch (error) {
-          console.error("Error fetching user sold books:", error);
-        }
+  useEffect(() => {
+    async function fetchUserSoldBooks() {
+      try {
+        const soldBooks = await getSoldBooks(); // Assuming getSoldBooks does not require userId
+        setUserSoldBooks(soldBooks);
+      } catch (error) {
+        console.error("Error fetching user sold books:", error);
       }
+    }
 
-      fetchUserSoldBooks();
-    }, []);
-      for (let i = 0; i < products.length; i++) {
-        console.log(products[i].category);
-        if (products[i].category !== dropValue) {
-        }
-      }
+    fetchUserSoldBooks();
+  }, []);
+  for (let i = 0; i < products.length; i++) {
+    console.log(products[i].category);
+    if (products[i].category !== dropValue) {
+    }
+  }
 
   return (
     <div className="homepage-container">
@@ -69,12 +84,12 @@ const Homepage = ({ products }) => {
         <h1>ThriftNU</h1>
         <div className="user-profile-info">
           <h3>Welcome, to ThriftNU</h3>
-            <div className="user-profile-link">
-              <Link to="/profile">View Your Profile</Link>
-            </div>
+          <div className="user-profile-link">
+            <Link to="/profile">View Your Profile</Link>
+          </div>
         </div>
       </div>
-    <div className="text-center">
+      <div className="text-center">
         <button
           onClick={toggleFormVisibility}
           className="btn btn-primary sell-button my-3"
@@ -82,7 +97,7 @@ const Homepage = ({ products }) => {
           {showForm ? "Hide Form" : "Click here to sell an Item"}
         </button>
       </div>
-     
+
 
       <Modal open={open} close={closeModal}>
         {selected ? (
@@ -120,14 +135,13 @@ const Homepage = ({ products }) => {
         open={showForm}
         close={toggleFormVisibility}
       >
-        <SellerForm />
+        <SellerForm userEmail={userEmail} />
       </Modal>
 
-      {console.log(searchTextbooks)}
       <div className="searchbar">
         <SearchBar onSearch={onSearch} />
       </div>
-      
+
       {/* <Dropdown>
         <Dropdown.Toggle
           variant="success"

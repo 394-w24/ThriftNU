@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { ref as getDbRef, get } from 'firebase/database';
 
 import SignUp from './Components/SignUpPage';
@@ -13,29 +13,35 @@ import SignIn from './Components/SignInPage';
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [products, setProducts] = useState([]);
+  const auth = getAuth();
+
+  // steven: maybe move "checkAuth" and "fetchData" function declaratoins 
+  // outside of the useEffect so that fetchData can be exported when we need to refresh the page
+  // sometimes (ProfilePage.jsx)
+  const checkAuthentication = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true);
+      }
+    });
+  };
+
+  const fetchData = async () => {
+    try {
+      const dbRef = getDbRef(database);
+      const snapshot = await get(dbRef);
+
+      if (snapshot.exists()) {
+        setProducts(snapshot.val()['products']);
+      } else {
+        console.log('No data available');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    const checkAuthentication = () => {
-      // You can add your authentication check logic here
-      // For now, let's set it to true unconditionally
-      setIsAuthenticated(true);
-    };
-
-    const fetchData = async () => {
-      try {
-        const dbRef = getDbRef(database);
-        const snapshot = await get(dbRef);
-
-        if (snapshot.exists()) {
-          setProducts(snapshot.val()['products']);
-        } else {
-          console.log('No data available');
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     checkAuthentication();
     fetchData();
   }, []);
@@ -56,10 +62,7 @@ function App() {
             isAuthenticated ? (
               <ProfilePage
                 products={products}
-                onBackToHomepage={() => {
-                  // Callback to navigate back to the homepage
-                  return <Navigate to="/home" />;
-                }}
+                updateData={fetchData}
               />
             ) : (
               <Navigate to="/" />

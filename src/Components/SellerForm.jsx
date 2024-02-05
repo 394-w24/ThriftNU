@@ -4,10 +4,10 @@ import "./SellerForm.css";
 import { useNavigate } from 'react-router-dom';
 import writeProductData from "../util/writeProductData";
 
-const SellerForm = () => {
-  const navigate = useNavigate();
+const SellerForm = ({ userEmail }) => {
   const [productDetails, setProductDetails] = useState({
     name: "",
+    email: userEmail,
     price: "",
     condition: "",
     subject: "",
@@ -58,11 +58,9 @@ const SellerForm = () => {
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter your email"
             name="email"
             value={productDetails.email}
-            onChange={handleChange}
-            required
+            disabled
           />
         </Form.Group>
 
