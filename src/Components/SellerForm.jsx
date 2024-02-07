@@ -38,6 +38,15 @@ const SellerForm = ({ userEmail, toggle }) => {
     console.log("Navigating to /home...");
     // Navigate to homepage after successful submission
     toggle();
+    setProductDetails({
+      name: "",
+      email: userEmail,
+      price: "",
+      condition: "",
+      subject: "",
+      description: "",
+    });
+    navigate("/home");
   };
 
   return (
