@@ -10,7 +10,7 @@ const ItemList = ({items, setSelectedItem, openModal, dropValue}) => {
 
     return (
         <div style={{ display: 'flex', justifyContent: 'space-evenly', flexWrap: 'wrap', alignItems: 'flex-end' }}>
-            {items
+            {items.filter((product) => !product.sold ? (dropValue ? product.subject === dropValue : true) : false)
             // .filter((product) => dropValue ? product.subject === dropValue : true)
             
             .map((item, id) =>
