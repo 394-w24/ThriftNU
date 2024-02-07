@@ -170,6 +170,19 @@ const SellerForm = ({ userEmail, toggle }) => {
         >
           Submit
         </Button>
+
+        <Button variant="secondary" style={{marginLeft: "20px"}} onClick={ () => 
+          setProductDetails({
+          name: "CS 340",
+          seller: "Mercy",
+          email: userEmail,
+          price: 15,
+          condition: "Used",
+          subject: "Computer Science",
+          description: "Networking",
+          })
+        }> Demo
+          </Button>
       </Form>
     </div>
   );
