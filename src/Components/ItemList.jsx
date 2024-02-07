@@ -10,7 +10,10 @@ const ItemList = ({items, setSelectedItem, openModal, dropValue}) => {
 
     return (
         <div style={{ display: 'flex', justifyContent: 'space-evenly', flexWrap: 'wrap', alignItems: 'flex-end' }}>
-            {Object.values(items).filter((product) => dropValue ? product.subject === dropValue : true).map((item, id) =>
+            {items
+            // .filter((product) => dropValue ? product.subject === dropValue : true)
+            
+            .map((item, id) =>
                 <Item key={id} item={item} click={() => clickHandler(item)} />
             )}
         </div>

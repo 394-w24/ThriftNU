@@ -37,10 +37,26 @@ const Homepage = ({ products }) => {
     });
   }, [auth, navigate, userEmail]);
 
+  const [isSortByAsc, setIsSortByAsc] = useState(true);
+  const compareNumbers = (a, b, isSortByAsc) => {
+    if (isSortByAsc) return a - b;
+    else return b - a;
+  }
+
+  const changeSortByAsc = () => { 
+    setIsSortByAsc(!isSortByAsc);
+  }
+
   const [searchTextbooks, setSearchTextbooks] = useState([]);
   useEffect(() => {
+    if (typeof products === 'object') {
+    const sortedProducts = Object.values(products).sort((a, b) => compareNumbers(a.price, b.price, isSortByAsc));
+    setSearchTextbooks(sortedProducts);  
+    return;
+    }
+  
     setSearchTextbooks(products);  // Set searchTextbooks initially with products
-  }, [products]);
+  }, [isSortByAsc, products]);
 
   function onSearch(searchTerm) {
     if (searchTerm === "") {
@@ -55,6 +71,8 @@ const Homepage = ({ products }) => {
     });
     setSearchTextbooks(filteredProducts);
   }
+
+
 
   // User sold books logic
   const [userSoldBooks, setUserSoldBooks] = useState([]);
@@ -137,9 +155,15 @@ const Homepage = ({ products }) => {
       >
         {userEmail && <SellerForm userEmail={userEmail} toggle={toggleFormVisibility} />}
       </Modal>
-
+        
+      
       <div className="searchbar">
         <SearchBar onSearch={onSearch} />
+        <div className="sort-by">
+          <button onClick={changeSortByAsc} className="btn btn-primary sort-button">
+            {isSortByAsc ? "Sort by Price ⬆️" : "Sort by Price ⬇️"}
+          </button>
+        </div>
       </div>
 
       {/* <Dropdown>

@@ -61,6 +61,10 @@
   margin-bottom: 20px;
 }
 
+.sort-by {
+  margin-left: 20px;
+}
+
 /* User profile info styling */
 .user-profile-info {
   text-align: center;
