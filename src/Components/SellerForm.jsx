@@ -1,9 +1,8 @@
 import React, { useState, useRef } from "react";
 import { Button, Form, Col } from "react-bootstrap";
 import "./SellerForm.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import writeProductData from "../util/writeProductData";
-
 
 const SellerForm = ({ userEmail, toggle }) => {
   const [productDetails, setProductDetails] = useState({
@@ -12,7 +11,7 @@ const SellerForm = ({ userEmail, toggle }) => {
     price: "",
     condition: "",
     subject: "",
-    description: ""
+    description: "",
   });
   const [imageFile, setImageFile] = useState(null);
   const imageInputRef = useRef();
@@ -39,13 +38,15 @@ const SellerForm = ({ userEmail, toggle }) => {
     console.log("Navigating to /home...");
     // Navigate to homepage after successful submission
     toggle();
-  }
-
+  };
 
   return (
     <div>
       <p className="scroll-instructions">Scroll down to see more options</p>
-      <Form className="seller-form" onSubmit={() => handleSubmit(productDetails, imageFile)}>
+      <Form
+        className="seller-form"
+        onSubmit={() => handleSubmit(productDetails, imageFile)}
+      >
         <h1>Sell a Textbook!</h1>
         {/* <Form.Row> */}
         <Form.Group as={Col} className="form-group">
@@ -126,6 +127,8 @@ const SellerForm = ({ userEmail, toggle }) => {
             <option value="Economics">Economics</option>
             <option value="Computer Science">Computer Science</option>
             <option value="English">English</option>
+            <option value="Math">Math</option>
+            <option value="Others">Others</option>
             {/* Add other subjects as needed */}
           </Form.Control>
         </Form.Group>
@@ -152,7 +155,10 @@ const SellerForm = ({ userEmail, toggle }) => {
           />
         </Form.Group>
         <br />
-        <Button variant="primary" onClick={() => handleSubmit(productDetails, imageFile)}>
+        <Button
+          variant="primary"
+          onClick={() => handleSubmit(productDetails, imageFile)}
+        >
           Submit
         </Button>
       </Form>
@@ -161,4 +167,3 @@ const SellerForm = ({ userEmail, toggle }) => {
 };
 
 export default SellerForm;
-
