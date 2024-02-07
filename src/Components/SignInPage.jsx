@@ -61,6 +61,10 @@ function SignIn() {
             />
           </div>
           <button type="submit">Log In</button>
+          <button style={{marginLeft:"20px"}} onClick={() => 
+            {setEmail('stevengu2024@u.northwestern.edu')
+            setPassword('123456')}}>Demo User
+          </button>
           {/* removed incorrect on click */}
           {/* onClick={() => signInWithEmailAndPassword(email, password)} */}
         </form>
